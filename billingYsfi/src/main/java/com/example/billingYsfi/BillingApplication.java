@@ -36,7 +36,7 @@ public class BillingApplication {
 					return args -> {
 		Customer customer=customerRestClient.getCustomerById(1L);
 		Bill bill1=billRepository.save(new Bill(null,new Date(),null,customer.getId(),null));
-		PagedModel<Product>prductPageModel=InventoryServiceClient.pageProducts();
+		PagedModel<Product>prductPageModel=productiteRestClient.findAll();
 						prductPageModel.forEach(p->{
 							ProductItem productItem=new ProductItem();
 							productItem.setPrice(p.getPrice());

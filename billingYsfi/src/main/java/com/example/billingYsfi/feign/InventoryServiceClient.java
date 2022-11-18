@@ -14,11 +14,11 @@ public interface InventoryServiceClient {
     @GetMapping("/products/{id}?projection=fullProduct")
     Product findProductById(@PathVariable("id") Long id);
     @GetMapping("/products?projection=fullProduct")
-    PagedModel<Product> findAll();
+      PagedModel<Product> findAll();
 
-    @GetMapping("/products")
-    static PagedModel<Product> pageProducts() {
-        return null;
-    }
+//    @GetMapping("/products")
+//    static PagedModel<Product> pageProducts() {
+//        return null;
+//    }
 
 }
