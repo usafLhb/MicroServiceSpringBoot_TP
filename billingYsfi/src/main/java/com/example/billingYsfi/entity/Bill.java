@@ -16,7 +16,8 @@ import java.util.Date;
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; private Date billingDate;
+    private Long id;
+    private Date billingDate;
     @OneToMany(mappedBy = "bill")
     private Collection<ProductItem> productItems;
     private long customerID;
