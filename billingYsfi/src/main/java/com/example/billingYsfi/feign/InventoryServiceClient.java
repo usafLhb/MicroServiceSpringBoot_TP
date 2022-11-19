@@ -13,8 +13,11 @@ import javax.ws.rs.QueryParam;
 public interface InventoryServiceClient {
     @GetMapping("/products/{id}?projection=fullProduct")
     Product findProductById(@PathVariable("id") Long id);
-    @GetMapping("/products?projection=fullProduct")
+    @GetMapping("/products")
       PagedModel<Product> findAll();
+    @GetMapping(path = "/products/{id}")
+        Product getProductById(@PathVariable("id") Long id);
+
 
 //    @GetMapping("/products")
 //    static PagedModel<Product> pageProducts() {

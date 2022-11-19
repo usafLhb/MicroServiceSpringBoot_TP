@@ -11,5 +11,6 @@ public interface ProductItemRepository extends
         JpaRepository<ProductItem,Long> {
 
     List<ProductItem> findByBillId(Long billID);
+    List<ProductItem> findAll();
 
 }

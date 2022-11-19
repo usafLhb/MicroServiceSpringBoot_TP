@@ -21,4 +21,6 @@ public class ProductItem {
     @ManyToOne
     private Bill bill;
     @Transient private Product product;
+    @Transient private String productName;
+
 }

@@ -17,6 +17,7 @@ import org.springframework.hateoas.PagedModel;
 
 import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @SpringBootApplication
 @EnableFeignClients
@@ -24,6 +25,7 @@ public class BillingApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BillingApplication.class, args);
+		System.out.println("Compile !");
 	}
 
 	@Bean
@@ -34,11 +36,16 @@ public class BillingApplication {
 			CustomerServiceClient customerRestClient,
 			InventoryServiceClient productiteRestClient ){
 					return args -> {
-		Customer customer=customerRestClient.getCustomerById(1L);
+		Customer customer=customerRestClient.findCustomerById(2L);
 		Bill bill1=billRepository.save(new Bill(null,new Date(),null,customer.getId(),null));
+		productiteRestClient.findAll().forEach(System.out::println);
+AtomicInteger i= new AtomicInteger(1);
+
 		PagedModel<Product>prductPageModel=productiteRestClient.findAll();
 						prductPageModel.forEach(p->{
 							ProductItem productItem=new ProductItem();
+							productItem.setProductID(i.getAndIncrement());
+//									System.out.println("re  "+p.getId());
 							productItem.setPrice(p.getPrice());
 							productItem.setQuantity(1+new Random().nextInt(100));
 							productItem.setBill(bill1);
