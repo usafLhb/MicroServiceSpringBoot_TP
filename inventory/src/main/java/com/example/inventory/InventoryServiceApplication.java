@@ -19,7 +19,6 @@ public class InventoryServiceApplication {
 	CommandLineRunner start(ProductRepository productRepository){
 
 		return args -> {
-
 			productRepository.save(new Product(null,"Computer Desk Top HP",900));
 			productRepository.save(new Product(null,"Printer Epson",80));
 			productRepository.save(new Product(null,"MacBook Pro Lap Top you",1800));

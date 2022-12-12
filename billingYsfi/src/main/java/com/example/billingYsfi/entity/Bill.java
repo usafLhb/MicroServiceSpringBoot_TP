@@ -20,6 +20,6 @@ public class Bill {
     private Date billingDate;
     @OneToMany(mappedBy = "bill")
     private Collection<ProductItem> productItems;
-    private long customerID;
+    private long customerId;
     @Transient private Customer customer;
 }

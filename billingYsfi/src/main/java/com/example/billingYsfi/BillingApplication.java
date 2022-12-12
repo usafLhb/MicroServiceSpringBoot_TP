@@ -37,7 +37,7 @@ public class BillingApplication {
 			InventoryServiceClient productiteRestClient ){
 					return args -> {
 		Customer customer=customerRestClient.findCustomerById(2L);
-		Bill bill1=billRepository.save(new Bill(null,new Date(),null,customer.getId(),null));
+		Bill bill1=billRepository.save(new Bill(null,new Date(),null,customer.getId(),customer));
 		productiteRestClient.findAll().forEach(System.out::println);
 AtomicInteger i= new AtomicInteger(1);
 
@@ -47,14 +47,32 @@ AtomicInteger i= new AtomicInteger(1);
 							productItem.setProductID(i.getAndIncrement());
 //									System.out.println("re  "+p.getId());
 							productItem.setPrice(p.getPrice());
+							productItem.setProductName(String.valueOf(p.getId()));
 							productItem.setQuantity(1+new Random().nextInt(100));
 							productItem.setBill(bill1);
 							productItemRepository.save(productItem);
 						}
 					 );
-		/*System.out.println("--");
-					System.out.println(customer.getId());
-					System.out.println(customer.getName());
-					System.out.println(customer.getEmail());*/
+
+
+
+
+						Customer customer2=customerRestClient.findCustomerById(3L);
+						Bill bill2=billRepository.save(new Bill(null,new Date(),null,customer2.getId(),customer2));
+						productiteRestClient.findAll().forEach(System.out::println);
+						AtomicInteger i2= new AtomicInteger(1);
+
+						PagedModel<Product>prductPageModel2=productiteRestClient.findAll();
+						prductPageModel2.forEach(p->{
+									ProductItem productItem=new ProductItem();
+									productItem.setProductID(i2.getAndIncrement());
+//									System.out.println("re  "+p.getId());
+									productItem.setPrice(p.getPrice());
+									productItem.setProduct(p);
+									productItem.setQuantity(1+new Random().nextInt(100));
+									productItem.setBill(bill2);
+									productItemRepository.save(productItem);
+								}
+						);
 
 };}}

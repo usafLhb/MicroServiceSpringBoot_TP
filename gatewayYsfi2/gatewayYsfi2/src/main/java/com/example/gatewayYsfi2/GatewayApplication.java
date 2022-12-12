@@ -1,5 +1,7 @@
 package com.example.gatewayYsfi2;
 
+//import org.keycloak.adapters.springsecurity.client.KeycloakClientRequestFactory;
+//import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.ReactiveDiscoveryClient;
