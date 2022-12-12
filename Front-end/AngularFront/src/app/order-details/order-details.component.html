@@ -1,0 +1,48 @@
+<div class="container" *ngIf="detailOrder">
+    <div class="row">
+     <div class="col-md-6"> 
+         <div class="card">
+             <div class="card-header" >Order ID: {{orderId}}</div>
+             <div class="card-body text-sm-start">
+                 <ul class="list-group">
+                     <li class="list-group-item">Order Date : {{detailOrder.billingDate |date:'dd/MM/YY hh:mm a' }} </li>
+                     <li class="list-group-item">Customer Id : {{detailOrder.customerId}} </li>                   
+                     <li class="list-group-item">Customer name : {{detailOrder.customer.name}} </li>
+                     <li class="list-group-item">Customer email : {{detailOrder.customer.email}} </li>
+                 </ul>
+             </div>
+         </div>
+     </div>
+     <div class="col-md-6">
+         <div class="card">
+             <div class="card-header">   Product Items     </div>
+             <div class="card-body">
+                 <table class="table">
+                     <thead class="bg-dark text-white">
+                         <tr>
+                             <th>productID</th>
+                             <th>name</th> 
+                             <th>price</th>
+                             <th>quantity</th>
+                             <th>Total</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <tr *ngFor="let pi of detailOrder.productItems">
+                         <td>{{pi.productID}}</td>
+                         <td>{{pi.productName}}</td>
+                         <td>{{pi.price }}</td> 
+                         <!-- |number:'#2' -->
+                         <td>{{pi.quantity}}</td>
+                         <td>{{pi.quantity * pi.price }}</td>
+ 
+                     </tr>
+                 </tbody>
+                 </table>
+             </div>
+         </div>
+     </div>
+    </div>
+ </div>
+ 
+ <!-- {{detailOrder|json}} -->
