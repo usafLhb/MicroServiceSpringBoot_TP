@@ -25,7 +25,7 @@ export class ProductsComponent implements OnInit {
       error:(err)=>{
 
       }
-    })
+    }) 
   }
   getOrderDetail(o:any){
   //   this.http.put<any>('https://jsonplaceholder.typicode.com/invalid-url')
