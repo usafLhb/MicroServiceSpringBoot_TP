@@ -30,7 +30,6 @@ public class BillingApplication {
 
 	@Bean
 	CommandLineRunner start(
-
 			BillRepository billRepository,
 			ProductItemRepository productItemRepository,
 			CustomerServiceClient customerRestClient,
@@ -53,8 +52,6 @@ AtomicInteger i= new AtomicInteger(1);
 							productItemRepository.save(productItem);
 						}
 					 );
-
-
 
 
 						Customer customer2=customerRestClient.findCustomerById(3L);

@@ -29,7 +29,7 @@ public class BillingRestController {
         this.inventoryServiceClient = inventoryServiceClient;
     }
     @GetMapping(path="fullBill/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('USER')")
     public Bill getBill(@PathVariable(name="id") Long id) throws ProductItemNotFoundException {
         Bill bill =billRepository.findById(id).get();
 
