@@ -2,13 +2,13 @@
     <table class="table" *ngIf="products">
         <thead>
             <tr>
-                <th>ID</th><th>NAME</th><th>PRICE</th>
+                <th>NAME</th><th>PRICE</th>
                 <!-- <th>QUANTITY</th> -->
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let p of products._embedded.products">
-                <td>{{p.id}}</td>
+                <!-- <td>{{p.id}}</td> -->
                 <td>{{p.name}}</td>
                 <td>{{p.price}}</td>
                 <!-- <td>{{p.id}}</td>
@@ -32,23 +32,29 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+            <form class="post-form"   [formGroup]="createPostForm"  (ngSubmit)="createPost()">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Small"  name="Name" [formControlName]="'name'" aria-describedby="inputGroup-sizing-sm">
                 </div>
-                <input type="text" class="form-control" aria-label="Small"  name="Name" aria-describedby="inputGroup-sizing-sm">
-              </div>
-              <div class="input-group input-group-sm mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">price</span>
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">price</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Small"  name="price" [formControlName]="'price'" aria-describedby="inputGroup-sizing-sm">
                 </div>
-                <input type="text" class="form-control" aria-label="Small"  name="price" aria-describedby="inputGroup-sizing-sm">
-              </div>
+                <button type="submit" class="btnCreatePost  btn btn-primary">
+                    Save changes
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </form>
         </div>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

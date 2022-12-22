@@ -11,6 +11,7 @@ import { CustomersComponent } from './customers/customers.component';
 import { ProductsComponent } from './products/products.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -39,6 +40,7 @@ export function kcFactory(kcSecService : KeycloakService){
    
     OrdersComponent,
     OrderDetailsComponent,
+    HomeComponent,
    
   ],
   imports: [
@@ -46,6 +48,7 @@ export function kcFactory(kcSecService : KeycloakService){
     AppRoutingModule,
     KeycloakAngularModule,
     HttpClientModule, 
+    ReactiveFormsModule, 
   ],
   providers: [{provide : APP_INITIALIZER, deps : [KeycloakService], useFactory : kcFactory, multi : true}],
   bootstrap: [AppComponent]

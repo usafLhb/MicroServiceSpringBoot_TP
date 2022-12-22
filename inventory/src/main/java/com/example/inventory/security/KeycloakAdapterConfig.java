@@ -1,4 +1,4 @@
-package com.example.billingYsfi.security;
+package com.example.inventory.security;
 
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.springframework.context.annotation.Bean;

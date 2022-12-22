@@ -47,20 +47,18 @@ public class BillingRestController {
        return bill;
     }
     @GetMapping(path="fullBill")
+    @PreAuthorize("hasAuthority('USER')")
     public List<Bill> getAllorder() throws ProductItemNotFoundException {
         List<Bill> bill =billRepository.findAll();
         return bill;
     }
 
     @GetMapping(path="order/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public List<Bill> getorder(@PathVariable(name="id") Long id) throws ProductItemNotFoundException {
         List<Bill> bill =billRepository.findByCustomerId(id);
         return bill;
     }
 
-    @PostMapping(path="postProduct}")
-    public ResponseEntity<Void> createPost(@RequestBody Product postRequest) {
-        ResponseEntity product=inventoryServiceClient.save(postRequest);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+
 }
