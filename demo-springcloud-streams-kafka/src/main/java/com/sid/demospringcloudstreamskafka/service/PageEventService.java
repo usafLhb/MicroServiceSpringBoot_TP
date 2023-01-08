@@ -62,6 +62,31 @@ public class PageEventService {
             return input;
         };
     }
+//    @Bean
+//    public Function<KStream<String,PageEvent>, KStream<String,Long>> kStreamFunction(){
+//        return (input)->{
+//            return input
+//
+//                    .filter((k,v)->v.getDuration()>100)
+//                    .map((k,v)->new KeyValue<>(v.getName(),v.getDuration()))
+//                    .groupBy((k,v)->k,Grouped.with(Serdes.String(),Serdes.Long()))
+//                    .windowedBy(TimeWindows.of(Duration.ofSeconds(1)))
+//                    .count(Materialized.as("page-count"))
+//                    .toStream()
+//                    .map((k,v)->new KeyValue<>("=>"+k.window().startTime()+k.window().endTime()+":"+k.key(),v));
+//
+////                    .filter((k,v)->v.getDuration()>100)
+////                    .map((k,v)->new KeyValue<>(v.getName(),v.getDuration()))
+////                    .groupByKey(Grouped.with(Serdes.String(),Serdes.Long()))
+////                    .windowedBy(TimeWindows.of(Duration.ofSeconds(1)))
+////                    .reduce((acc, v) -> {long sum=(acc+v)/2;return sum; },Materialized.as("stats-store"))
+////                    .toStream()
+////                    .map((k,v)->new KeyValue<>("=>"+k.window().startTime()+k.window().endTime()+":"+k.key(),v));
+//
+//        };
+//    }
+
+
     @Bean
     public Function<KStream<String,PageEvent>, KStream<String,Long>> kStreamFunction(){
         return (input)->{
@@ -69,19 +94,11 @@ public class PageEventService {
 
                     .filter((k,v)->v.getDuration()>100)
                     .map((k,v)->new KeyValue<>(v.getName(),v.getDuration()))
-                    .groupBy((k,v)->k,Grouped.with(Serdes.String(),Serdes.Long()))
+                    .groupByKey(Grouped.with(Serdes.String(),Serdes.Long()))
                     .windowedBy(TimeWindows.of(Duration.ofSeconds(1)))
-                    .count(Materialized.as("page-count"))
+                    .reduce((acc, v) -> {long sum=(acc+v)/2;return sum; },Materialized.as("stats-store"))
                     .toStream()
                     .map((k,v)->new KeyValue<>("=>"+k.window().startTime()+k.window().endTime()+":"+k.key(),v));
-
-//                    .filter((k,v)->v.getDuration()>100)
-//                    .map((k,v)->new KeyValue<>(v.getName(),v.getDuration()))
-//                    .groupByKey(Grouped.with(Serdes.String(),Serdes.Long()))
-//                    .windowedBy(TimeWindows.of(Duration.ofSeconds(1)))
-//                    .reduce((acc, v) -> {long sum=(acc+v)/2;return sum; },Materialized.as("stats-store"))
-//                    .toStream()
-//                    .map((k,v)->new KeyValue<>("=>"+k.window().startTime()+k.window().endTime()+":"+k.key(),v));
 
         };
     }
